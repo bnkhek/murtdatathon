@@ -50,9 +50,14 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
         gradient_vector[j] = np.dot(constant_vector, np.transpose(x_matrix[:,j]))
 
 def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
+    """
+    Perform logistic regression via the gradient descent algorithm.
+    """
     weights = np.ones(n)
     while True:
         new_weights = weights - learning_rate * calculate_gradient_vector(weights, x_matrix, y_vector)
         if np.linalg.norm(new_weights - weights) < threshold:
             return new_weights
         weights = new_weights
+
+print(logistic_gradient_descent(x_values, y_values, 0.1, 0.001))
