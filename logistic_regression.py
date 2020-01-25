@@ -16,8 +16,10 @@ with open('divorce.csv', newline='') as csv_file:
             header = False
             continue
         row = row[0].split(";")
-        raw_x_values.append(row[:-1])
-        raw_y_values.append(row[-1:])
+        x_values = list(map(float, row[:-1]))
+        y_values = list(map(float, row[-1:]))
+        raw_x_values.append(x_values)
+        raw_y_values.append(y_values)
 
 # Numpy matrices
 x_values = np.matrix(raw_x_values)
