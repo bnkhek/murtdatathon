@@ -12,14 +12,35 @@ with open('divorce.csv', newline='') as csv_file:
     next(divorce_data) # skip header row
     for row in divorce_data:
         row = row[0].split(";")
-        x_values = list([float(x) for x in row[:-1]])
-        y_values = list([float(x) for x in row[-1:]])
-        raw_x_values.append(x_values)
-        raw_y_values.append(y_values)
+        training_x_values = list([float(x) for x in row[:-1]])
+        training_y_values = list([float(x) for x in row[-1:]])
+        raw_x_values.append(training_x_values)
+        raw_y_values.append(training_y_values)
 
 # Numpy matrices
-x_values = np.matrix(raw_x_values)
-y_values = np.matrix(raw_y_values)
+
+# 84 divorced couples
+divorced_x_values = raw_x_values[:84]
+divorced_y_values = raw_y_values[:84]
+
+# 86 married couples
+married_x_values = raw_x_values[84:]
+married_y_values = raw_y_values[84:]
+
+#  Training Values
+raw_training_x_values = divorced_x_values[:42] + married_x_values[:43]
+raw_training_y_values = divorced_y_values[:42] + married_y_values[:43]
+
+raw_test_x_values = divorced_x_values[42:] + married_x_values[43:]
+raw_test_y_values = divorced_y_values[42:] + married_y_values[43:]
+
+#  Numpy Training Values Matrices
+training_x_values = np.matrix(raw_training_x_values)
+training_y_values = np.matrix(raw_training_y_values)
+
+#  Numpy Test Values Matrices
+test_x_values = np.matrix(raw_test_x_values)
+test_y_values = np.matrix(raw_test_y_values)
 
 def linear_model(weights, x):
     """
@@ -49,7 +70,7 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
     """
     Calculate the gradient vector given a set of current weights, as well as the training data.
     """
-    m, n = x_values.shape
+    m, n = training_x_values.shape
     gradient_vector = np.ones(n + 1)
     constant_vector = np.ones(m)
     for i in range(m):
@@ -63,7 +84,7 @@ def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
     """
     Perform logistic regression via the gradient descent algorithm.
     """
-    n = x_values.shape[1]
+    n = training_x_values.shape[1]
     weights = np.ones(n + 1)
     while True:
         new_weights = weights - learning_rate * calculate_gradient_vector(weights, x_matrix, y_vector)
@@ -71,18 +92,25 @@ def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
             return new_weights
         weights = new_weights
 
-output = logistic_gradient_descent(x_values, y_values, 0.01, 0.001)
+output = logistic_gradient_descent(training_x_values, training_y_values, 0.01, 0.001)
 
 print(output.tolist())
 
-test = np.array([2] * 54)
-print(logistic_model_probability(output, test))
-print(logistic_model_threshold(output, test))
+accuracy = 0
+rows = test_x_values.shape[0]
 
-test2 = x_values[160].A1
-print(logistic_model_probability(output, test2))
-print(logistic_model_threshold(output, test2))
+for i in range(rows):
+    test_row = test_x_values[i].A1
+    if logistic_model_threshold(output, test_row) == (test_y_values[i, 0] == 1):
+        accuracy += 1
 
-test3 = x_values[40].A1
-print(logistic_model_probability(output, test3))
-print(logistic_model_threshold(output, test3))
+accuracy /= rows
+print(accuracy)
+
+# test2 = test_x_values[-1].A1
+# print(logistic_model_probability(output, test2))
+# print(logistic_model_threshold(output, test2))
+
+# test3 = training_x_values[40].A1
+# print(logistic_model_probability(output, test3))
+# print(logistic_model_threshold(output, test3))
