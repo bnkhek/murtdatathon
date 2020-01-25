@@ -63,4 +63,6 @@ def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
             return new_weights
         weights = new_weights
 
-print(logistic_gradient_descent(x_values, y_values, 0.1, 0.001))
+output = logistic_gradient_descent(x_values, y_values, 0.1, 0.001)
+
+print(output.tolist())
