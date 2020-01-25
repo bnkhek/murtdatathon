@@ -47,9 +47,10 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
     gradient_vector = np.ones(n)
     constant_vector = np.ones(m)
     for i in range(m):
-        constant_vector[i] = sigmoid_model(linear_model(weights, x_matrix[i])) - y_vector[i, 0] # index?
+        constant_vector[i] = sigmoid_model(linear_model(weights, x_matrix[i].A1)) - y_vector[i, 0] # index?
     for j in range(n):
-        gradient_vector[j] = np.dot(constant_vector, np.transpose(x_matrix[:,j]))
+        gradient_vector[j] = np.dot(constant_vector, np.transpose(x_matrix[:,j]).A1)
+    return gradient_vector
 
 def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
     """
