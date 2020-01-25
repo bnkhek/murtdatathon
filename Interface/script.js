@@ -64,11 +64,11 @@ var cards_html = "";
 
 questions.forEach(function(question, num) {
     cards_html += "<div class='card'><div class='question'>" + question + "</div>" +
-        "<input type='radio' name='" + num + "' value='0' id='" + num + "-" + "0'><label for='" + num + "-" + "0'>Strongly Disagree</label>" +
-        "<input type='radio' name='" + num + "' value='1' id='" + num + "-" + "1'><label for='" + num + "-" + "1'>Disagree</label>" +
-        "<input type='radio' name='" + num + "' value='2' id='" + num + "-" + "2'><label for='" + num + "-" + "2'>Neutral</label>" +
-        "<input type='radio' name='" + num + "' value='3' id='" + num + "-" + "3'><label for='" + num + "-" + "3'>Agree</label>" +
-        "<input type='radio' name='" + num + "' value='4' id='" + num + "-" + "4'><label for='" + num + "-" + "4'>Strongly Agree</label>" +
+        "<input type='radio' name='" + num + "' value='0' id='" + num + "-" + "0'><label for='" + num + "-" + "0'>Never</label>" +
+        "<input type='radio' name='" + num + "' value='1' id='" + num + "-" + "1'><label for='" + num + "-" + "1'>Seldom</label>" +
+        "<input type='radio' name='" + num + "' value='2' id='" + num + "-" + "2'><label for='" + num + "-" + "2'>Sometimes</label>" +
+        "<input type='radio' name='" + num + "' value='3' id='" + num + "-" + "3'><label for='" + num + "-" + "3'>Frequently</label>" +
+        "<input type='radio' name='" + num + "' value='4' id='" + num + "-" + "4'><label for='" + num + "-" + "4'>Always</label>" +
         "</div></div>";
 });
 
