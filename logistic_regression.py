@@ -70,7 +70,7 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
     """
     Calculate the gradient vector given a set of current weights, as well as the training data.
     """
-    m, n = training_x_values.shape
+    m, n = x_matrix.shape
     gradient_vector = np.ones(n + 1)
     constant_vector = np.ones(m)
     for i in range(m):
@@ -84,7 +84,7 @@ def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
     """
     Perform logistic regression via the gradient descent algorithm.
     """
-    n = training_x_values.shape[1]
+    n = x_matrix.shape[1]
     weights = np.ones(n + 1)
     while True:
         new_weights = weights - learning_rate * calculate_gradient_vector(weights, x_matrix, y_vector)
