@@ -1,6 +1,5 @@
 import csv
 import numpy as np
-import math
 
 # Initialization of matrices as Python lists
 raw_x_values = []
@@ -37,7 +36,7 @@ def sigmoid_model(z):
     """
     Evaluate the sigmoid function with input value z.
     """
-    return 1 / (1 + math.exp(-z))
+    return 1 / (1 + np.exp(-z))
 
 def calculate_gradient_vector(weights, x_matrix, y_vector):
     """
@@ -50,5 +49,10 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
     for j in range(n):
         gradient_vector[j] = np.dot(constant_vector, np.transpose(x_matrix[:,j]))
 
-
-
+def logistic_gradient_descent(x_matrix, y_vector, learning_rate, threshold):
+    weights = np.ones(n)
+    while True:
+        new_weights = weights - learning_rate * calculate_gradient_vector(weights, x_matrix, y_vector)
+        if np.linalg.norm(new_weights - weights) < threshold:
+            return new_weights
+        weights = new_weights
