@@ -1,0 +1,133 @@
+body {
+    text-align: center;
+    font-family: Arial;
+}
+
+.sub {
+    max-width: 40em;
+    padding: 0 1em;
+    margin: 0 auto;
+}
+
+.card {
+    margin: 2em auto;
+    background: #ddd;
+    padding: .6em;
+    border-radius: 5px;
+    max-width: 34em;
+}
+
+.card .question {
+    padding: .5em .5em .7em;
+}
+
+.card input[type=radio] {
+    display: none;
+}
+
+.card label {
+    display: inline-block;
+    margin: .2em .4em;
+    background: white;
+    cursor: pointer;
+    padding: .4em .5em;
+    border-radius: 4px;
+    transition: .2s;
+}
+
+.card input[type=radio]:checked+label {
+    background: orange;
+}
+
+.card label:hover {
+    background: #ffda97;
+}
+
+#submit {
+    display: inline-block;
+    margin: 0 .4em 1.5em .4em;
+    background: #ccc;
+    cursor: pointer;
+    padding: 1em 1.1em;
+    border-radius: 4px;
+    transition: .2s;
+    border: 0;
+    font-size: 1.4em;
+    outline: 0;
+}
+
+#submit:hover {
+    background: #ffda97;
+}
+
+#submit:active {
+    background: orange;
+}
+
+#stage-2 {
+    display: none;
+}
+
+#result {
+    margin: 2em auto;
+    width: 11em;
+    font-size: 1.6em;
+    display: none;
+    opacity: 0;
+    transition: .4s;
+}
+
+#result:before,
+#result:after {
+    content: '';
+    display: block;
+    width: 11em;
+    height: 11em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    transition: 1s;
+}
+
+#result:before {
+    background-image: url("img/left-heart.svg");
+    margin-bottom: -12em;
+}
+
+#result:after {
+    background-image: url("img/right-heart.svg");
+    margin-top: -12.06em;
+}
+
+#divorce {
+    border-radius: 50%;
+    background: #ddd;
+    width: 3em;
+    height: 3em;
+    line-height: 3em;
+    margin: .3em auto;
+    font-size: 3em;
+}
+
+.sub-2 {
+    opacity: 0;
+    transition: 1s;
+    font-size: 1.4em;
+    margin: 2em auto;
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 1;
+    }
+    84% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
