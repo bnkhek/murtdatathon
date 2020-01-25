@@ -33,6 +33,18 @@ def sigmoid_model(z):
     """
     return 1 / (1 + np.exp(-z))
 
+def logistic_model_probability(weights, x):
+    """
+    Evaluate the logistic model given a set of weights and x values to find a probability.
+    """
+    return sigmoid_model(linear_model(weights, x))
+
+def logistic_model_threshold(weights, x):
+    """
+    Evaluate the logistic model given a set of weights and x values to find a true or false value.
+    """
+    return linear_model(weights, x) > 0
+
 def calculate_gradient_vector(weights, x_matrix, y_vector):
     """
     Calculate the gradient vector given a set of current weights, as well as the training data.
@@ -41,7 +53,7 @@ def calculate_gradient_vector(weights, x_matrix, y_vector):
     gradient_vector = np.ones(n)
     constant_vector = np.ones(m)
     for i in range(m):
-        constant_vector[i] = sigmoid_model(linear_model(weights, x_matrix[i].A1)) - y_vector[i, 0]
+        constant_vector[i] = logistic_model_probability(weights, x_matrix[i].A1) - y_vector[i, 0]
     for j in range(n):
         gradient_vector[j] = np.dot(constant_vector, np.transpose(x_matrix[:,j]).A1)
     return gradient_vector
@@ -63,13 +75,10 @@ output = logistic_gradient_descent(x_values, y_values, 0.01, 0.001)
 print(output.tolist())
 
 test = np.array([2] * 54)
-
-print(sigmoid_model(linear_model(output, test)))
+print(logistic_model_threshold(output, test))
 
 test2 = x_values[160].A1
-
-print(sigmoid_model(linear_model(output, test2)))
+print(logistic_model_threshold(output, test2))
 
 test3 = x_values[40].A1
-
-print(sigmoid_model(linear_model(output, test3)))
+print(logistic_model_threshold(output, test3))
